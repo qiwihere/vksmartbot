@@ -13,8 +13,8 @@ vk = vk_session.get_api()
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW and event.to_me and event.text:
 
-        if event.text == '1':
+        if event.text == 'Кто такой Данчос':
             if event.from_user:
-                vk.messages.send(user_id=event.user_id, random_id=random.randint(0, 100000), message='Ваш текст')
+                vk.messages.send(user_id=event.user_id, random_id=random.randint(0, 100000), message='Самый лучший музыкант')
             elif event.from_chat:
-                vk.messages.send(chat_id=event.chat_id, random_id=random.randint(0, 100000), message='Ваш текст')
+                vk.messages.send(chat_id=event.chat_id, random_id=random.randint(0, 100000), message='Самый лучший музыкант')
