@@ -9,7 +9,7 @@ vk_session = vk_api.VkApi(token=API_KEY)
 
 longpoll = VkBotLongPoll(vk_session, 'your_group_id')
 
-    for event in longpoll.listen():
+for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
             print('Новое сообщение:')
