@@ -7,7 +7,8 @@ API_KEY = '386f42c8e90decc0b69903e39ff2b3df71fb2afb42e5463df3830e77097532ad70722
 
 vk_session = vk_api.VkApi(token=API_KEY)
 
-longpoll = VkBotLongPoll(vk_session, 'your_group_id')
+
+longpoll = VkBotLongPoll(vk_session, '176461659')
 
 for event in longpoll.listen():
 
