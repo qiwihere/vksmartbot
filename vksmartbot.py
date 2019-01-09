@@ -1,4 +1,5 @@
 import vk_api
+import random
 import requests
 from vk_api.longpoll import VkLongPoll, VkEventType
 
@@ -14,6 +15,6 @@ for event in longpoll.listen():
 
         if event.text == '1':
             if event.from_user:
-                vk.messages.send(user_id=event.user_id, random_id=event.random_id, message='Ваш текст')
+                vk.messages.send(user_id=event.user_id, random_id=random.randint(0, 100000), message='Ваш текст')
             elif event.from_chat:
-                vk.messages.send(chat_id=event.chat_id, random_id=event.random_id, message='Ваш текст')
+                vk.messages.send(chat_id=event.chat_id, random_id=random.randint(0, 100000), message='Ваш текст')
