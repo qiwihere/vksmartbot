@@ -12,7 +12,7 @@ longpoll = VkBotLongPoll(vk_session, '176461659')
 
 def parse_voice(event):
     if event.obj.attachments:
-        attachments = json.loads(event.obj.attachments).pop()
+        attachments = event.obj.attachments.pop()
         if attachments.type == 'audio_message':
             return attachments.audio_message.link_ogg
 
