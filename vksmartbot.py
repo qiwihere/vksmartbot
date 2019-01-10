@@ -7,7 +7,6 @@ API_KEY = '386f42c8e90decc0b69903e39ff2b3df71fb2afb42e5463df3830e77097532ad70722
 FOLDER_ID = 'b1g5ijjultbev6ue6u3l'
 
 iam_token = lib.get_iam_token(OAUTH)
-print(iam_token)
 
 vk_session = vk_api.VkApi(token=API_KEY)
 vk = vk_session.get_api()
@@ -17,7 +16,11 @@ for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
             if event.from_user:
-                print(lib.parse_voice(event))
+                file = lib.parse_voice_message(event)
+                if file:
+                    stt = lib.yandex_stt(file, FOLDER_ID, iam_token)
+                    print(stt)
+
                 '''
                 if event.obj.text:
                     vk.messages.send(
