@@ -13,8 +13,6 @@ vk_session = vk_api.VkApi(token=API_KEY)
 vk = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, GROUP_ID)
 
-lib.gtts_write('Привет бро, как твои дела?', 1, 1)
-
 for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:

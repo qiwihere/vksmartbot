@@ -57,7 +57,7 @@ def gtts_write(text, vk_session, peer_id):
     f.close()
 
     upload = vk_api.VkUpload(vk_session)
-   # speech = open('speech.mp3', 'rb').read()
     audio_message = upload.audio_message(f, peer_id=peer_id)
 
     print(audio_message)
+    print('test')
