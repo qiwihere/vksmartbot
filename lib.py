@@ -2,6 +2,9 @@ import requests
 import json
 import urllib
 import urllib.request
+from gtts import gTTS
+import vk_api
+from vk_api import VkUpload
 
 
 def parse_voice_message(event):
@@ -45,3 +48,16 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
         return speech_text
     else:
         return 'Не понимаю, что ты сказал'
+
+
+def gtts_write(text, vk_session, peer_id):
+    path = 'speech.mp3'
+    tts = gTTS(text, lang='ru')
+    tts.save(path)
+
+    upload = vk_api.VkUpload(vk_session)
+
+    speech = open(path, 'rb').read()
+    audio_message = upload.audio_message(speech, peer_id=peer_id)
+
+    print(audio_message)
