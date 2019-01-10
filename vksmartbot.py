@@ -13,16 +13,8 @@ longpoll = VkBotLongPoll(vk_session, '176461659')
 for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
-            if event.from_user:  # Если написали в ЛС
-                vk.messages.send(  # Отправляем сообщение
-                    user_id=event.user_id,
-                    random_id=random.randint(0,1000),
-                    message='Ваш текст'
-                )
-            elif event.from_chat:  # Если написали в Беседе
-                vk.messages.send(  # Отправляем собщение
-                    chat_id=event.chat_id,
-                    random_id=random.randint(0,1000),
-                    message='Ваш текст'
-                )
+            vk.messages.send(
+                user_id=event.obj.from_id,
+                message=event.obj.text
+            )
 
