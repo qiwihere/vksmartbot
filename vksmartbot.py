@@ -11,8 +11,8 @@ longpoll = VkBotLongPoll(vk_session, '176461659')
 
 
 def parse_voice(event):
-    if event.attachments:
-        attachments = json.loads(event.attachments).pop()
+    if event.obj.attachments:
+        attachments = json.loads(event.obj.attachments).pop()
         if attachments.type == 'audio_message':
             return attachments.audio_message.link_ogg
 
@@ -30,7 +30,6 @@ for event in longpoll.listen():
                         message=event.obj.text
                     )
                 '''
-
             if event.from_chat:
                 '''
                 vk.messages.send(
