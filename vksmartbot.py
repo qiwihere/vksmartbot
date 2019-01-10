@@ -13,9 +13,16 @@ longpoll = VkBotLongPoll(vk_session, '176461659')
 for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
-            vk.messages.send(
-                user_id=event.obj.from_id,
-                random_id=random.randint(0, 10 ^ 24),
-                message=event.obj.text
-            )
+            if event.from_user:
+                vk.messages.send(
+                    user_id=event.obj.from_id,
+                    random_id=random.randint(0, 10 ^ 24),
+                    message=event.obj.text
+                )
+            if event.from_chat:
+                vk.messages.send(
+                    chat_id=event.obj.chat_id,
+                    random_id=random.randint(0, 10 ^ 24),
+                    message=event.obj.text
+                )
 
