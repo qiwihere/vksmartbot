@@ -16,7 +16,7 @@ for event in longpoll.listen():
                 if event.obj.text:
                     vk.messages.send(
                         user_id=event.obj.from_id,
-                        random_id=event.random_id,
+                        random_id=event.obj.random_id,
                         message=event.obj.text
                     )
                 print(event.obj.attachments)
