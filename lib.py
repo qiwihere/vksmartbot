@@ -50,14 +50,14 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
         return 'Не понимаю, что ты сказал'
 
 
-def gtts_write(text, vk_session, peer_id):
+def gtts_write(text, vk_session, peer_id, group_id):
     f = open(r'speech.mp3', 'wb')
     tts = gTTS(text, lang='ru')
     tts.write_to_fp(f)
     f.close()
 
     upload = vk_api.VkUpload(vk_session)
-    audio_message = upload.audio_message(f, peer_id=peer_id)
+    audio_message = upload.audio_message(f, peer_id=peer_id, group_id=group_id)
 
     print(audio_message)
     print('test')
