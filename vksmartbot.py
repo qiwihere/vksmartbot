@@ -31,7 +31,7 @@ for event in longpoll.listen():
                     vk.messages.send(
                         chat_id=event.chat_id,
                         random_id=event.obj.random_id,
-                        message=event.obj.text
+                        message=stt
                     )
 
 
