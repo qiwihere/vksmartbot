@@ -1,27 +1,23 @@
 import vk_api
-import json
+import lib
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
+OAUTH = 'AQAAAAAhCBSBAATuwXFbrFfLpECUtyfTrytLZFs'
 API_KEY = '386f42c8e90decc0b69903e39ff2b3df71fb2afb42e5463df3830e77097532ad707228314279a726a90c1'
+FOLDER_ID = 'b1g5ijjultbev6ue6u3l'
+
+iam_token = lib.get_iam_token(OAUTH)
+print(iam_token)
 
 vk_session = vk_api.VkApi(token=API_KEY)
 vk = vk_session.get_api()
-
 longpoll = VkBotLongPoll(vk_session, '176461659')
-
-
-def parse_voice(event):
-    if event.obj.attachments:
-        attachments = event.obj.attachments.pop()
-        if attachments['type'] == 'audio_message':
-            return attachments['audio_message']['link_ogg']
-
 
 for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
             if event.from_user:
-                print(parse_voice(event))
+                print(lib.parse_voice(event))
                 '''
                 if event.obj.text:
                     vk.messages.send(
