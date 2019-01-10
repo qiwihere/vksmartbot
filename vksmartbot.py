@@ -25,11 +25,13 @@ for event in longpoll.listen():
                         message=stt
                     )
             if event.from_chat:
-                '''
-                vk.messages.send(
-                    chat_id=event.chat_id,
-                    random_id=event.obj.random_id,
-                    message=event.obj.text
-                )
-                '''
+                file = lib.parse_voice_message(event)
+                if file:
+                    stt = lib.yandex_stt(file, FOLDER_ID, iam_token)
+                    vk.messages.send(
+                        chat_id=event.chat_id,
+                        random_id=event.obj.random_id,
+                        message=event.obj.text
+                    )
+
 
