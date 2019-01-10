@@ -51,13 +51,13 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
 
 
 def gtts_write(text, vk_session, peer_id):
-    path = 'speech.mp3'
+    f = open(r'speech.mp3', 'wb')
     tts = gTTS(text, lang='ru')
-    tts.save(path)
+    tts.write_to_fp(f)
+    f.close()
 
     upload = vk_api.VkUpload(vk_session)
-
-    speech = open(path, 'rb').read()
+    speech = open('speech.mp3', 'rb').read()
     audio_message = upload.audio_message(speech, peer_id=peer_id)
 
     print(audio_message)
