@@ -57,7 +57,7 @@ def gtts_write(text, vk_session, peer_id, group_id):
     f.close()
 
     upload = vk_api.VkUpload(vk_session)
-    audio_message = upload.audio_message(f, peer_id=peer_id, group_id=group_id)
+    audio_message = upload.document(f)
 
     print(audio_message)
     print('test')
