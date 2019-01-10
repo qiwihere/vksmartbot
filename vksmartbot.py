@@ -19,7 +19,7 @@ for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
             if event.from_user:
                 file = lib.parse_voice_message(event)
-                if file.len() > 0:
+                if file:
                     stt = lib.yandex_stt(file, FOLDER_ID, iam_token)
                     vk.messages.send(
                         user_id=event.obj.from_id,
@@ -29,7 +29,7 @@ for event in longpoll.listen():
                     lib.gtts_write(stt, vk_session, event.obj.peer_id)
             if event.from_chat:
                 file = lib.parse_voice_message(event)
-                if file.len() > 0:
+                if file:
                     stt = lib.yandex_stt(file, FOLDER_ID, iam_token)
                     vk.messages.send(
                         chat_id=event.chat_id,
