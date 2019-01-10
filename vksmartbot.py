@@ -19,16 +19,11 @@ for event in longpoll.listen():
                 file = lib.parse_voice_message(event)
                 if file:
                     stt = lib.yandex_stt(file, FOLDER_ID, iam_token)
-                    print(stt)
-
-                '''
-                if event.obj.text:
                     vk.messages.send(
                         user_id=event.obj.from_id,
                         random_id=event.obj.random_id,
-                        message=event.obj.text
+                        message=stt
                     )
-                '''
             if event.from_chat:
                 '''
                 vk.messages.send(

@@ -1,6 +1,7 @@
 import requests
 import json
 import urllib
+import urllib.request
 
 
 def parse_voice_message(event):
@@ -38,5 +39,9 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
     url.add_header("Transfer-Encoding", "chunked")
 
     responseData = urllib.request.urlopen(url).read().decode('UTF-8')
-    #decodedData = json.loads(responseData)
-    return responseData
+    decodedData = json.loads(responseData)
+    if decodedData.get("error_code") is None:
+        speech_text = decodedData.get('result')
+        return speech_text
+    else:
+        return 'Не понимаю, что ты сказал'
