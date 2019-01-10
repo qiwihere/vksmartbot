@@ -21,7 +21,7 @@ for event in longpoll.listen():
                 )
             if event.from_chat:
                 vk.messages.send(
-                    chat_id=event.obj.chat_id,
+                    chat_id=event.chat_id,
                     random_id=random.randint(0, 10 ^ 24),
                     message=event.obj.text
                 )
