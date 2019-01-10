@@ -19,6 +19,7 @@ for event in longpoll.listen():
                     random_id=random.randint(0, 10 ^ 24),
                     message=event.obj.text
                 )
+                print(event.obj.attachments)
             if event.from_chat:
                 vk.messages.send(
                     chat_id=event.chat_id,
