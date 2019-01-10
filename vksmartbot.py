@@ -3,7 +3,7 @@ import lib
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
 OAUTH = 'AQAAAAAhCBSBAATuwXFbrFfLpECUtyfTrytLZFs'
-API_KEY = '386f42c8e90decc0b69903e39ff2b3df71fb2afb42e5463df3830e77097532ad707228314279a726a90c1'
+API_KEY = '418496b115781695441809b525dc0d3053e416179d0ef7a8243b71dd95fcc7d57b0c916a8b3d72dfcac79'
 FOLDER_ID = 'b1g5ijjultbev6ue6u3l'
 
 GROUP_ID = '176461659'
