@@ -25,7 +25,7 @@ for event in longpoll.listen():
                         random_id=event.obj.random_id,
                         message=stt
                     )
-                    # lib.gtts_write(stt, vk_session, event.obj.peer_id, GROUP_ID)
+
 
             if event.from_chat:
                 file = lib.parse_voice_message(event)

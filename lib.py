@@ -2,9 +2,7 @@ import requests
 import json
 import urllib
 import urllib.request
-from gtts import gTTS
-import vk_api
-from vk_api import VkUpload
+import apiai
 
 
 def parse_voice_message(event):
@@ -50,14 +48,14 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
         return 'Не понимаю, что ты сказал'
 
 
-def gtts_write(text, vk_session, peer_id, group_id):
-    f = open(r'speech.mp3', 'wb')
-    tts = gTTS(text, lang='ru')
-    tts.write_to_fp(f)
-    f.close()
-
-    upload = vk_api.VkUpload(vk_session)
-    audio_message = upload.document(f)
-
-    print(audio_message)
-    print('test')
+def textMessage(token, text):
+    request = apiai.ApiAI(token).text_request()
+    request.lang = 'ru'
+    request.session_id = 'vksmartbot'
+    request.query = text
+    responseJson = json.loads(request.getresponse().read().decode('utf-8'))
+    response = responseJson['result']['fulfillment']['speech']
+    if response:
+        return response
+    else:
+        return 'Очень сложна, не панятна!'
