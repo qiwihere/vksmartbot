@@ -5,6 +5,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 OAUTH = 'AQAAAAAhCBSBAATuwXFbrFfLpECUtyfTrytLZFs'
 API_KEY = '418496b115781695441809b525dc0d3053e416179d0ef7a8243b71dd95fcc7d57b0c916a8b3d72dfcac79'
 FOLDER_ID = 'b1g5ijjultbev6ue6u3l'
+APIAI_TOKEN = '7924625f79ee47e3af89bad9df7ccb1a'
 
 GROUP_ID = '176461659'
 iam_token = lib.get_iam_token(OAUTH)
@@ -25,7 +26,13 @@ for event in longpoll.listen():
                         random_id=event.obj.random_id,
                         message=stt
                     )
-
+                if event.obj.text:
+                    answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
+                    vk.messages.send(
+                        user_id=event.obj.from_id,
+                        random_id=event.obj.random_id,
+                        message=answer
+                    )
 
             if event.from_chat:
                 file = lib.parse_voice_message(event)
