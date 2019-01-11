@@ -48,7 +48,7 @@ def yandex_stt(file, folder_id, IAM_TOKEN):
         return 'Не понимаю, что ты сказал'
 
 
-def textMessage(token, text):
+def df_answer(token, text):
     request = apiai.ApiAI(token).text_request()
     request.lang = 'ru'
     request.session_id = 'vksmartbot'
