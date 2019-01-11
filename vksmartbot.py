@@ -26,6 +26,7 @@ for event in longpoll.listen():
                         random_id=event.obj.random_id,
                         message=stt
                     )
+                # dialogflow
                 if event.obj.text:
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
                     vk.messages.send(
