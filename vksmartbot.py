@@ -27,7 +27,7 @@ for event in longpoll.listen():
                         message=stt
                     )
                 if event.obj.text:
-                    answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
+                    answer = 'test' # lib.df_answer(APIAI_TOKEN, event.obj.text)
                     vk.messages.send(
                         user_id=event.obj.from_id,
                         random_id=event.obj.random_id,
