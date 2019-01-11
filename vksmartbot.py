@@ -5,7 +5,7 @@ from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 OAUTH = 'AQAAAAAhCBSBAATuwXFbrFfLpECUtyfTrytLZFs'
 API_KEY = '418496b115781695441809b525dc0d3053e416179d0ef7a8243b71dd95fcc7d57b0c916a8b3d72dfcac79'
 FOLDER_ID = 'b1g5ijjultbev6ue6u3l'
-APIAI_TOKEN = '7924625f79ee47e3af89bad9df7ccb1a'
+APIAI_TOKEN = '496b61334b5a4450b84957f6e18a70e9'
 
 GROUP_ID = '176461659'
 iam_token = lib.get_iam_token(OAUTH)
