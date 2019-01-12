@@ -14,11 +14,12 @@ vk_session = vk_api.VkApi(token=API_KEY)
 vk = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, GROUP_ID)
 
-lib.send_gtts_message('Привет!', -176461659, vk_session)
+
 for event in longpoll.listen():
 
         if event.type == VkBotEventType.MESSAGE_NEW:
             if event.from_user:
+                lib.send_gtts_message('Привет!', event.obj.from_id, vk_session)
                 file = lib.parse_voice_message(event)
                 if file:
                     stt = lib.yandex_stt(file, FOLDER_ID, iam_token)

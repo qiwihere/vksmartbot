@@ -70,5 +70,5 @@ def send_gtts_message(text, peer_id, vk_session):
     f.close()
 
     upload = vk_api.VkUpload(vk_session)
-    doc = upload.document(f, doc_type='audio_message', message_peer_id=(2000000000+peer_id))
+    doc = upload.document(f, doc_type='audio_message', message_peer_id=peer_id)
     print(doc)
