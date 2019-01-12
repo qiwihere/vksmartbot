@@ -67,7 +67,8 @@ def send_gtts_message(text, peer_id, vk_session):
     tts = gTTS(text, lang='ru')
     f = open(r'tts_test.mp3', 'wb')
     tts.write_to_fp(f)
-    upload = vk_api.VkUpload(vk_session)
-    doc = upload.document(f, doc_type='audio_message', message_peer_id=peer_id)
     f.close()
+
+    upload = vk_api.VkUpload(vk_session)
+    doc = upload.document(open('tts_test.mp3', 'rb').read(), doc_type='audio_message', message_peer_id=peer_id)
     print(doc)
