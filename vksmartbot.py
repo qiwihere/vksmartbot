@@ -35,7 +35,13 @@ for event in longpoll.listen():
                         random_id=event.obj.random_id,
                         message=answer
                     )
-                    lib.giphy_upload(answer, vk_session, event.obj.from_id)
+                    gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
+                    if gif:
+                        vk.messages.send(
+                            user_id=event.obj.from_id,
+                            random_id=event.obj.random_id,
+                            attachment=gif
+                        )
 
             if event.from_chat:
                 file = lib.parse_voice_message(event)
