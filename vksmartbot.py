@@ -30,11 +30,6 @@ for event in longpoll.listen():
                 # dialogflow
                 if event.obj.text:
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
-                    vk.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id=event.obj.random_id,
-                        message=answer
-                    )
                     gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
                     if gif:
                         vk.messages.send(
@@ -42,6 +37,14 @@ for event in longpoll.listen():
                             random_id=event.obj.random_id,
                             attachment=gif
                         )
+                    else:
+                        vk.messages.send(
+                            user_id=event.obj.from_id,
+                            random_id=event.obj.random_id,
+                            message=answer
+                        )
+
+
 
             if event.from_chat:
                 file = lib.parse_voice_message(event)
@@ -52,17 +55,19 @@ for event in longpoll.listen():
                         random_id=event.obj.random_id,
                         message=stt
                     )
-                if event.obj.text and event.obj.from_id == 129098383:
-                    vk.messages.send(
-                        chat_id=event.chat_id,
-                        random_id=event.obj.random_id,
-                        message='Никита пидор'
-                    )
                 # dialogflow
                 if event.obj.text and event.obj.text[0:3].lower() == 'бот':
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text[4:])
-                    vk.messages.send(
-                        chat_id=event.chat_id,
-                        random_id=event.obj.random_id,
-                        message=answer
-                    )
+                    gif = lib.giphy_upload(answer, vk_session, 2000000000+event.chat_id)
+                    if gif:
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=event.obj.random_id,
+                            attachment=gif
+                        )
+                    else:
+                        vk.messages.send(
+                            chat_id=event.chat_id,
+                            random_id=event.obj.random_id,
+                            message=answer
+                        )
