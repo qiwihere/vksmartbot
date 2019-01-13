@@ -72,7 +72,7 @@ def giphy_upload(link, vk_session, peer_id):
         f.close()
 
         upload = vk_api.VkUpload(vk_session)
-        doc = upload.document(open('giphy.gif', 'rb').read(), message_peer_id=peer_id)
+        doc = upload.document('giphy.gif', message_peer_id=peer_id)
         print(doc)
 
 
