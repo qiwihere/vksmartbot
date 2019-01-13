@@ -65,8 +65,14 @@ def df_answer(token, text):
 
 def giphy_upload(link, vk_session, peer_id):
     if link.find('giphy.gif'):
+
+        f = open(r'giphy.gif', 'wb')
+        wf = requests.get(link)
+        f.write(wf.content)
+        f.close()
+
         upload = vk_api.VkUpload(vk_session)
-        doc = upload.document(link, message_peer_id=peer_id)
+        doc = upload.document(open('giphy.gif', 'rb').read(), message_peer_id=peer_id)
         print(doc)
 
 
