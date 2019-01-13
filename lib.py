@@ -73,7 +73,7 @@ def giphy_upload(link, vk_session, peer_id):
 
         upload = vk_api.VkUpload(vk_session)
         doc = upload.document('giphy.gif', message_peer_id=peer_id)
-        att_str = '<doc><'+doc['doc']['owner_id']+'>_<'+doc['doc']['id']+'>'
+        att_str = '<doc><'+str(doc['doc']['owner_id'])+'>_<'+str(doc['doc']['id'])+'>'
         print(att_str)
         return att_str
 
