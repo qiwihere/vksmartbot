@@ -52,8 +52,8 @@ for event in longpoll.listen():
                         message='Никита пидор'
                     )
                 # dialogflow
-                if event.obj.text and event.obj.text.split(',')[0]=='Бот':
-                    answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
+                if event.obj.text and event.obj.text[0:4].lower() == 'бот':
+                    answer = lib.df_answer(APIAI_TOKEN, event.obj.text[4:])
                     vk.messages.send(
                         chat_id=event.chat_id,
                         random_id=event.obj.random_id,
