@@ -63,6 +63,13 @@ def df_answer(token, text):
         return 'Очень сложна, не панятна!'
 
 
+def giphy_upload(link, vk_session, peer_id):
+    if link.find('giphy.gif'):
+        upload = vk_api.VkUpload(vk_session)
+        doc = upload.document(link, message_peer_id=peer_id)
+        print(doc)
+
+
 def send_gtts_message(text, peer_id, vk_session):
     tts = gTTS(text, lang='ru')
     f = open(r'tts_test.mp3', 'wb')
