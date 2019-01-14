@@ -102,5 +102,5 @@ def translate_n_speech(text, key, vk_session, peer_id):
     decodedData = json.loads(responseData)
     translated = decodedData['text']
 
-    print(decodedData)
-    return say(translated, vk_session, peer_id)
+    print(translated)
+    #return say(translated, vk_session, peer_id)
