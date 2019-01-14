@@ -29,12 +29,6 @@ for event in longpoll.listen():
                     )
                 # dialogflow
                 if event.obj.text:
-                    vk.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id=event.obj.random_id,
-                        attachment=lib.say('Привет дорогой друг', vk_session, event.obj.from_id)
-                    )
-
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
                     gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
                     if gif:

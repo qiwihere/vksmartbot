@@ -87,13 +87,3 @@ def say(text, vk_session, peer_id):
     doc = upload.document('tts.mp3', message_peer_id=peer_id, doc_type='audio_message')
     att_str = 'doc' + str(doc['audio_message']['owner_id']) + '_' + str(doc['audio_message']['id'])
     return att_str
-
-def send_gtts_message(text, peer_id, vk_session):
-    tts = gTTS(text, lang='ru')
-    f = open(r'tts.mp3', 'wb')
-    tts.write_to_fp(f)
-    f.close()
-
-    upload = vk_api.VkUpload(vk_session)
-    doc = upload.document('tts_test.mp3', doc_type='audio_message', message_peer_id=peer_id)
-
