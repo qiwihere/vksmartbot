@@ -76,6 +76,7 @@ def giphy_upload(link, vk_session, peer_id):
         att_str = 'doc'+str(doc['doc']['owner_id'])+'_'+str(doc['doc']['id'])
         return att_str
 
+
 def say(text, vk_session, peer_id):
     tts = gTTS(text, lang='ru')
     f = open(r'tts.mp3', 'wb')
@@ -84,7 +85,7 @@ def say(text, vk_session, peer_id):
 
     upload = vk_api.VkUpload(vk_session)
     doc = upload.document('tts.mp3', message_peer_id=peer_id, doc_type='audio_message')
-    #att_str = 'doc' + str(doc['doc']['owner_id']) + '_' + str(doc['doc']['id'])
+    att_str = 'doc' + str(doc['audio_message']['owner_id']) + '_' + str(doc['audio_message']['id'])
     return doc
 
 def send_gtts_message(text, peer_id, vk_session):
