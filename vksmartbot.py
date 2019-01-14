@@ -36,8 +36,8 @@ for event in longpoll.listen():
                         answer_func = json.loads('{%s}' % answer)
                         func = answer_func['action']
                         arg = answer_func['value']
-                        print(func+'/'+arg)
                         if func == 'translate_n_speech':
+                            print('ok')
                             vk.messages.send(
                                 user_id=event.obj.from_id,
                                 random_id=event.obj.random_id,
