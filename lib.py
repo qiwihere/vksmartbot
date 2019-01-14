@@ -60,7 +60,7 @@ def df_answer(token, text):
     if response:
         return response
     else:
-        return 'Очень сложна, не панятна!'
+        return 'Я только проснулся, попробуй еще разок!'
 
 
 def giphy_upload(link, vk_session, peer_id):
