@@ -71,33 +71,34 @@ for event in longpoll.listen():
                     )
                 # dialogflow
                 if event.obj.text:
-                    answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
-                    # if json
-                    try:
-                        answer_func = json.loads('{%s}' % answer)
-                        func = answer_func['action']
-                        arg = answer_func['value']
-                        if func == 'translate_n_speech':
-                            translated = lib.translate_n_speech(arg, GT_KEY, vk_session, event.obj.from_id)
-                            vk.messages.send(
-                                message=translated['text'],
-                                chat_id=event.chat_id,
-                                random_id=event.obj.random_id,
-                                attachment=translated['speech']
-                            )
+                    if event.obj.text[0:4].lower() == 'бот':
+                        answer = lib.df_answer(APIAI_TOKEN, event.obj.text[5:])
+                        # if json
+                        try:
+                            answer_func = json.loads('{%s}' % answer)
+                            func = answer_func['action']
+                            arg = answer_func['value']
+                            if func == 'translate_n_speech':
+                                translated = lib.translate_n_speech(arg, GT_KEY, vk_session, event.obj.from_id)
+                                vk.messages.send(
+                                    message=translated['text'],
+                                    chat_id=event.chat_id,
+                                    random_id=event.obj.random_id,
+                                    attachment=translated['speech']
+                                )
 
-                    except ValueError:
-                        gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
-                        if gif:
-                            vk.messages.send(
-                                chat_id=event.chat_id,
-                                random_id=event.obj.random_id,
-                                attachment=gif
-                            )
-                        else:
-                            vk.messages.send(
-                                chat_id=event.chat_id,
-                                random_id=event.obj.random_id,
-                                message=answer
-                            )
+                        except ValueError:
+                            gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
+                            if gif:
+                                vk.messages.send(
+                                    chat_id=event.chat_id,
+                                    random_id=event.obj.random_id,
+                                    attachment=gif
+                                )
+                            else:
+                                vk.messages.send(
+                                    chat_id=event.chat_id,
+                                    random_id=event.obj.random_id,
+                                    message=answer
+                                )
 
