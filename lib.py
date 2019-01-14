@@ -100,7 +100,7 @@ def translate_n_speech(text, key, vk_session, peer_id):
     url = urllib.request.Request("https://translate.yandex.net/api/v1.5/tr.json/translate?%s" % params)
     responseData = urllib.request.urlopen(url).read().decode('UTF-8')
     decodedData = json.loads(responseData)
-    translated = decodedData.get('data')
+    translated = decodedData.get('text')
 
     print(responseData)
     return say(translated, vk_session, peer_id)
