@@ -71,8 +71,8 @@ for event in longpoll.listen():
                     )
                 # dialogflow
                 if event.obj.text:
-                    if event.obj.text[0:4].lower() == 'бот':
-                        answer = lib.df_answer(APIAI_TOKEN, event.obj.text[4:])
+                    if event.obj.text[0:2].lower() == 'бот':
+                        answer = lib.df_answer(APIAI_TOKEN, event.obj.text[3:])
                         # if json
                         try:
                             answer_func = json.loads('{%s}' % answer)
