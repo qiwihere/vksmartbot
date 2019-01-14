@@ -2,6 +2,7 @@ import requests
 import json
 import urllib
 import urllib.request
+import urllib.parse
 import apiai
 from gtts import gTTS
 import vk_api
@@ -92,7 +93,7 @@ def say(text, vk_session, peer_id):
 def translate_n_speech(text, key, vk_session, peer_id):
     params = "&".join([
         "key=%s" % key,
-        "text=%s" % text,
+        "text=%s" % urllib.parse.urlencode(text),
         "lang=ru-en"
     ])
 
