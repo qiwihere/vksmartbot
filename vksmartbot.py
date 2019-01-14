@@ -1,5 +1,6 @@
 import vk_api
 import lib
+import json
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
 OAUTH = 'AQAAAAAhCBSBAATuwXFbrFfLpECUtyfTrytLZFs'
@@ -30,19 +31,31 @@ for event in longpoll.listen():
                 # dialogflow
                 if event.obj.text:
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
-                    gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
-                    if gif:
+                    try:
+                        answer_func = json.loads(answer)
+                        func = answer_func['action']
+                        arg = answer_func['value']
+
                         vk.messages.send(
                             user_id=event.obj.from_id,
                             random_id=event.obj.random_id,
-                            attachment=gif
+                            message=func
                         )
-                    else:
-                        vk.messages.send(
-                            user_id=event.obj.from_id,
-                            random_id=event.obj.random_id,
-                            message=answer
-                        )
+
+                    except ValueError:
+                        gif = lib.giphy_upload(answer, vk_session, event.obj.from_id)
+                        if gif:
+                            vk.messages.send(
+                                user_id=event.obj.from_id,
+                                random_id=event.obj.random_id,
+                                attachment=gif
+                            )
+                        else:
+                            vk.messages.send(
+                                user_id=event.obj.from_id,
+                                random_id=event.obj.random_id,
+                                message=answer
+                            )
 
 
 
