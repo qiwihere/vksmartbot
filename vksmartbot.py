@@ -37,10 +37,12 @@ for event in longpoll.listen():
                         func = answer_func['action']
                         arg = answer_func['value']
                         if func == 'translate_n_speech':
+                            translated = lib.translate_n_speech(arg, GT_KEY, vk_session, event.obj.from_id)
                             vk.messages.send(
+                                message=translated['text'],
                                 user_id=event.obj.from_id,
                                 random_id=event.obj.random_id,
-                                attachment=lib.translate_n_speech(arg, GT_KEY, vk_session, event.obj.from_id)
+                                attachment=translated['speech']
                             )
 
                     except ValueError:
