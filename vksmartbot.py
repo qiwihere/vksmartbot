@@ -32,7 +32,7 @@ for event in longpoll.listen():
                 if event.obj.text:
                     answer = lib.df_answer(APIAI_TOKEN, event.obj.text)
                     try:
-                        answer_func = json.loads(answer)
+                        answer_func = json.loads('{%s}' % answer)
                         func = answer_func['action']
                         arg = answer_func['value']
 
