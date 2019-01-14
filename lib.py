@@ -93,7 +93,7 @@ def say(text, vk_session, peer_id):
 def translate_n_speech(text, key, vk_session, peer_id):
     params = "&".join([
         "key=%s" % key,
-        "text=%s" % urllib.parse.urlencode(text),
+        "text=%s" % urllib.parse.quote_plus(text),
         "lang=ru-en"
     ])
 
