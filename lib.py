@@ -78,7 +78,7 @@ def giphy_upload(link, vk_session, peer_id):
 
 
 def say(text, vk_session, peer_id):
-    tts = gTTS(text, lang='ru')
+    tts = gTTS(text, lang='en')
     f = open(r'tts.mp3', 'wb')
     tts.write_to_fp(f)
     f.close()
@@ -87,3 +87,18 @@ def say(text, vk_session, peer_id):
     doc = upload.document('tts.mp3', message_peer_id=peer_id, doc_type='audio_message')
     att_str = 'doc' + str(doc['audio_message']['owner_id']) + '_' + str(doc['audio_message']['id'])
     return att_str
+
+
+def translate_n_speech(text, key, vk_session, peer_id):
+    params = "&".join([
+        "key=%s" % key,
+        "text=%s" % text,
+        "lang=ru-en"
+    ])
+
+    url = urllib.request.Request("https://translate.yandex.net/api/v1.5/tr.json/translate?%s" % params)
+    responseData = urllib.request.urlopen(url).read().decode('UTF-8')
+    decodedData = json.loads(responseData)
+    translated = decodedData.get('data')
+
+    return say(translated,vk_session,peer_id)
